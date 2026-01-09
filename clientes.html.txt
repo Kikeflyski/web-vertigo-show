@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clientes - Vértigo Show</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+
+    html, body {min-height: 100%;}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #d4af37;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("vertigo_show_logo_transparente_total.png") no-repeat center center;
+      background-size: 110vmin;
+      opacity: 0.20;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav, .section, footer {position: relative; z-index: 1;}
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 999;
+      align-items: center;
+    }
+
+    nav a {
+      color: #00eaff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {color: #ff004c;}
+
+    /* === MENÚ MÓVIL (AÑADIDO) === */
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color:#00eaff;
+      font-size:2rem;
+      cursor:pointer;
+    }
+
+    .nav-links{
+      display:flex;
+    }
+
+    .section {
+      padding: 6rem 2rem 4rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section h1 {
+      font-size: 3rem;
+      color: #00eaff;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-align:center;
+      font-size:1.2rem;
+      max-width:850px;
+      margin:0 auto 2.5rem;
+    }
+
+    .highlight-quote{
+      font-size:1.3rem;
+      font-weight:700;
+      background: linear-gradient(90deg, #d4af37, #fff7b0, #d4af37);
+      background-size:200% 100%;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation: shimmer 4s infinite linear, glow 2.6s ease-in-out infinite;
+      text-align:center;
+    }
+
+    @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    @keyframes glow{
+      0%,100%{text-shadow:0 0 6px rgba(255,215,0,.6),0 0 12px rgba(255,215,0,.4);}
+      50%{text-shadow:0 0 14px rgba(255,255,255,.9),0 0 28px rgba(255,200,0,.7);}
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .client-card {
+      background: #111;
+      padding: 2rem;
+      border-radius: 10px;
+      border: 2px solid #00eaff;
+      text-align: center;
+      transition: .3s;
+    }
+
+    .client-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.6),
+    0 0 24px rgba(255, 215, 0, 0.5),
+    0 0 36px rgba(255, 223, 70, 0.4);
+  border-color: #ffd700;
+}
+
+    .client-card h3 {color:#00eaff;margin-bottom:.6rem;}
+
+    .logo-section{
+      margin-top:3.5rem;
+      text-align:center;
+    }
+
+    .logo-section h2{
+      color:#00eaff;
+      margin-bottom:1.5rem;
+    }
+
+    .logo-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      gap:2rem;
+      align-items:center;
+    }
+
+    /* 🔵 LOGOS UNIFORMES Y A COLOR */
+    .logo-grid img{
+      width: 100%;
+      max-width: 150px;
+      height: 120px;
+      max-height: 120px;
+      object-fit: contain;
+      display: block;
+      margin: auto;
+      opacity: 1;
+      transition: .3s;
+      filter: none;
+    }
+
+    .logo-grid img:hover{
+      transform: scale(1.05);
+    }
+
+    .reasons-box{
+      background:#0b0b0b;
+      border:2px solid #00eaff;
+      border-radius:12px;
+      padding:1.5rem;
+      margin-top:3rem;
+    }
+
+    .reasons-box h2{
+      text-align:center;
+      color:#00eaff;
+      margin-bottom:1rem;
+    }
+
+    .testimonials {margin-top: 4rem;}
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      color: #00eaff;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .testimonial {
+      background: #111;
+      padding: 2rem;
+      border-radius: 10px;
+      border-left: 4px solid #00eaff;
+      margin-bottom: 2rem;
+    }
+
+    .keyline{font-weight:bold;color:#fff;}
+
+    .author {
+      color:#00eaff;
+      font-weight:bold;
+      text-align:right;
+      margin-top:1rem;
+    }
+
+    .cta-box{
+      margin-top:3rem;
+      text-align:center;
+      background:#0b0b0b;
+      border-radius:12px;
+      padding:2rem;
+      border:2px solid #00eaff;
+    }
+
+    .cta-box a{
+      color:#00eaff;
+      font-weight:bold;
+      text-decoration:none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #05080c;
+      color: #d4af37;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    footer strong{
+      color:#ffd700;
+    }
+
+    footer a{
+      color:#00eaff;
+      text-decoration:none;
+    }
+
+    footer a.contact-link,
+    footer a.contact-link strong{
+      color:#00eaff;
+    }
+
+    footer a:hover{
+      text-decoration:underline;
+    }
+
+    @media (max-width: 768px) {
+      /* Sustituimos el wrap por hamburguesa */
+      nav {justify-content: space-between; padding: 0.8rem 1rem;}
+
+      .menu-toggle{display:block;}
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,.95);
+        flex-direction:column;
+        align-items:center;
+        display:none;
+        padding:1.5rem 0;
+      }
+
+      .nav-links.active{display:flex;}
+
+      .nav-links a{
+        margin:0;
+        padding:0.9rem 0;
+        font-size:1.15rem;
+      }
+
+      .section h1 {font-size: 2.3rem;}
+      .logo-grid img{max-width:120px;height:100px;max-height:100px;}
+      body::before{display:none;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Sobre Nosotros</a>
+      <a href="espectaculos.html">Espectáculos</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+    </div>
+  </nav>
+
+  <div class="section" data-aos="fade-up">
+
+    <h1>Nuestros Clientes</h1>
+
+    <p class="subtitle">
+      Trabajamos con ayuntamientos, puertos, marcas, productoras, hoteles y eventos privados
+      que buscan un espectáculo profesional, seguro y de alto impacto visual.
+    </p>
+
+    <p class="highlight-quote">
+      Cada show es una carta de presentación visual que deja huella.
+    </p>
+
+    <div class="clients-grid">
+
+      <div class="client-card">
+        <h3>Ayuntamientos y Puertos</h3>
+        <p>Eventos públicos, festivales y celebraciones oficiales.</p>
+      </div>
+
+      <div class="client-card">
+        <h3>Marcas y Empresas</h3>
+        <p>Lanzamientos, acciones de marca y eventos corporativos.</p>
+      </div>
+
+      <div class="client-card">
+        <h3>Productoras</h3>
+        <p>Rodajes, TV, videoclips y espectáculos creativos.</p>
+      </div>
+
+      <div class="client-card">
+        <h3>Hoteles y Resorts</h3>
+        <p>Shows exclusivos para huéspedes. Sí, volamos en piscinas.</p>
+      </div>
+
+      <div class="client-card">
+        <h3>Organizadores de Eventos</h3>
+        <p>Boatshows, festivales, conciertos y grandes producciones.</p>
+      </div>
+
+      <div class="client-card">
+        <h3>Clientes VIP</h3>
+        <p>Bodas y celebraciones privadas.</p>
+      </div>
+    </div>
+
+    <div class="logo-section">
+      <h2>Han confiado en nosotros</h2>
+
+      <div class="logo-grid">
+        <img src="logo puerto deportivo.jpg" alt="Logo cliente 1">
+        <img src="logo demarfly.png" alt="Logo cliente 2">
+        <img src="logo rfem.jpg" alt="Logo cliente 3">
+        <img src="logo hrp.jpg" alt="Logo cliente 4">
+      </div>
+    </div>
+
+    <div class="reasons-box">
+      <h2>¿Por qué confían en nosotros?</h2>
+      <ul>
+        <li>✔ Más de 10 años realizando espectáculos acuáticos</li>
+        <li>✔ Pilotos profesionales y equipo técnico especializado</li>
+        <li>✔ Seguridad y coordinación como prioridad</li>
+        <li>✔ Producciones visuales de alto impacto</li>
+        <li>✔ Shows diseñados a medida para cada evento</li>
+      </ul>
+    </div>
+
+    <div class="testimonials">
+
+      <h2>Testimonios</h2>
+
+      <div class="testimonial">
+        <p class="keyline">
+          “Su espectáculo se convirtió en el punto culminante de la jornada gracias a una ejecución impecable y una puesta en escena de primer nivel.”
+        </p>
+        <p>
+          Hemos tenido la oportunidad de contar con Vértigo Show para nuestro evento y la experiencia ha sido verdaderamente sobresaliente…
+        </p>
+        <div class="author">- Puerto Deportivo de Mazarrón</div>
+      </div>
+
+      <div class="testimonial">
+        <p class="keyline">
+          “La experiencia fue sencillamente brutal. Entendieron nuestro universo creativo desde el primer minuto.”
+        </p>
+        <p>
+          La puesta en escena fue tan potente que el impacto en redes fue enorme…
+        </p>
+        <div class="author">- Mainline Magic Orchestra</div>
+      </div>
+
+      <div class="testimonial">
+        <p class="keyline">
+          “Su profesionalidad, coordinación y alto nivel de producción contribuyen de manera decisiva a crear experiencias seguras y espectaculares.”
+        </p>
+        <p>
+          Gracias a su atención al detalle, contamos siempre con la tranquilidad de trabajar con un equipo de primer nivel.
+        </p>
+        <div class="author">- Real Federación Española de Motonáutica</div>
+      </div>
+
+    </div>
+
+    <div class="cta-box">
+      <p>Si quieres un espectáculo como estos en tu evento, estaremos encantados de ayudarte.</p>
+      <p>📞 WhatsApp: <strong>+34 622 605 836</strong></p>
+      <p><a href="contacto.html">Solicita información sin compromiso</a></p>
+    </div>
+
+  </div>
+
+  <footer>
+    Contacto por WhatsApp:
+    <a href="tel:+34622605836" class="contact-link"><strong>+34 622 605 836</strong></a> |
+    Email:
+    <a href="mailto:info@vertigoshowproducciones.com" class="contact-link">info@vertigoshowproducciones.com</a> |
+    Vértigo Show © 2026
+    <br><br>
+    <a href="aviso-legal.html">Aviso Legal y Política de Privacidad</a>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleMenu(){
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(link=>{
+      link.addEventListener("click",()=>{
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>

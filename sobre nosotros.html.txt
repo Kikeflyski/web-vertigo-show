@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre Nosotros - Vértigo Show</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #FFD700;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset:0;
+      background: url("vertigo_show_logo_transparente_total.png") no-repeat center center;
+      background-size: 95vmin;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav, .section, footer{
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== MENÚ ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 999;
+    }
+
+    nav a {
+      color: #00eaff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition:.3s;
+    }
+
+    nav a:hover {color: #ff004c;}
+
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color:#00eaff;
+      font-size:2rem;
+      cursor:pointer;
+    }
+
+    .nav-links{
+      display:flex;
+    }
+
+    .section {
+      padding: 7rem 2rem 4rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h1, h2 {color: #00eaff; font-weight: bold;}
+
+    h1 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin: 2.3rem 0 1rem;
+    }
+
+    p {
+      font-size: 1.15rem;
+      margin-bottom: 1.4rem;
+      color: #FFD700;
+    }
+
+    .video-mini {
+      max-width: 500px;
+      margin: 2rem auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0, 234, 255, 0.4);
+      border:2px solid rgba(0,234,255,0.4);
+    }
+
+    .highlight-box{
+      border: 2px solid #00eaff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      background: rgba(0,0,0,0.6);
+    }
+
+    ul{margin-left: 1rem; margin-bottom: 1rem;}
+    li{margin-bottom: 0.8rem;}
+
+    .cta{
+      text-align:center;
+      margin-top:2.5rem;
+    }
+
+    .cta a{
+      display:inline-block;
+      padding:1rem 1.9rem;
+      border-radius:6px;
+      text-decoration:none;
+      font-weight:bold;
+      background:#ff004c;
+      color:#fff;
+      transition:.3s;
+    }
+
+    .cta a:hover{
+      background:#00eaff;
+      color:#000;
+    }
+
+    footer{
+      text-align:center;
+      padding:2rem 1rem;
+      background:#05080c;
+      color:#d4af37;
+      font-size:0.95rem;
+      margin-top:2rem;
+    }
+
+    footer strong{
+      color:#ffd700;
+    }
+
+    footer a{
+      color:#00eaff;
+      text-decoration:none;
+    }
+
+    footer a.contact-link,
+    footer a.contact-link strong{
+      color:#00eaff;
+    }
+
+    @media (max-width: 768px){
+
+      nav{
+        justify-content: space-between;
+        padding:0.8rem 1rem;
+      }
+
+      .menu-toggle{
+        display:block;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,0.95);
+        flex-direction:column;
+        align-items:center;
+        display:none;
+        padding:1.5rem 0;
+      }
+
+      .nav-links.active{
+        display:flex;
+      }
+
+      .nav-links a{
+        margin:0;
+        padding:0.9rem 0;
+        font-size:1.15rem;
+      }
+
+      .section{
+        padding:6.5rem 1.2rem 3rem;
+      }
+
+      h1{font-size:2.2rem;}
+      h2{font-size:1.7rem;}
+      p{font-size:1.05rem;}
+
+      body::before{
+        background-size:95vmin;
+        opacity:0.14;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Sobre Nosotros</a>
+      <a href="espectaculos.html">Espectáculos</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+    </div>
+  </nav>
+
+  <div class="section" data-aos="fade-up">
+
+    <video class="video-mini" autoplay muted loop playsinline>
+      <source src="baile, barco.MP4" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+
+    <h1>Sobre Nosotros</h1>
+
+    <div class="highlight-box">
+      <p>
+        Somos una compañía especializada en <strong>espectáculos profesionales de flyboard</strong> para eventos públicos, corporativos y privados.
+        Combinamos agua, luz, música y precisión técnica para crear shows únicos y espectaculares.
+      </p>
+
+      <p>
+        <strong>Con base en Puerto de Mazarrón (Murcia)</strong>, realizamos espectáculos en toda España
+        y también nos desplazamos a cualquier parte del mundo si el evento lo requiere.
+      </p>
+    </div>
+
+    <p>
+      En Vértigo Show somos especialistas en espectáculos acuáticos de alto nivel para eventos exclusivos,
+      corporativos e institucionales. Desde hace más de 10 años llevamos nuestros shows a todo tipo de eventos,
+      convirtiendo cada escenario en una experiencia única e inolvidable.
+    </p>
+
+    <p>
+      Nuestro enfoque combina técnica, estética y emoción para crear experiencias que impactan desde el
+      primer instante y permanecen en la memoria del público.
+    </p>
+
+    <h2>Por qué confiar en nosotros</h2>
+
+    <div class="highlight-box">
+      <ul>
+        <li><strong>✓ Más de 10 años de experiencia en espectáculos acuáticos</strong></li>
+        <li><strong>✓ Pilotos profesionales y equipo técnico especializado</strong></li>
+        <li><strong>✓ Seguridad y coordinación como prioridad</strong></li>
+        <li><strong>✓ Seguro de Responsabilidad Civil incluido</strong></li>
+        <li><strong>✓ Shows personalizados según el tipo de evento</strong></li>
+        <li><strong>✓ Producción visual de alto impacto</strong></li>
+      </ul>
+    </div>
+
+    <h2>Nuestra Experiencia</h2>
+
+    <p>
+      Hemos actuado en puertos deportivos, playas, piscinas privadas, hoteles, festivales, eventos corporativos,
+      fiestas en barco, bodas y eventos VIP, tanto en España como en otros países.
+    </p>
+
+    <h2>Nuestro Compromiso</h2>
+
+    <p><strong>Profesionalidad y seguridad:</strong> trabajamos con pilotos expertos, equipo certificado y seguros de Responsabilidad Civil.</p>
+    <p><strong>Innovación:</strong> trajes LED, fuego frío, iluminación y efectos visuales de última generación.</p>
+    <p><strong>Personalización:</strong> adaptamos cada espectáculo al espacio, tipo de evento y estilo del cliente.</p>
+
+    <h2>Nuestra Filosofía</h2>
+
+    <p>
+      No solo creamos espectáculos, creamos recuerdos que permanecen.
+    </p>
+
+    <div class="cta">
+      <a href="contacto.html">Quiero más información sobre los espectáculos</a>
+    </div>
+
+  </div>
+
+  <footer>
+    Contacto por WhatsApp:
+    <a href="tel:+34622605836" class="contact-link"><strong>+34 622 605 836</strong></a> |
+    Email:
+    <a href="mailto:info@vertigoshowproducciones.com" class="contact-link">info@vertigoshowproducciones.com</a> |
+    Vértigo Show © 2026
+    <br><br>
+    <a href="aviso-legal.html">Aviso Legal y Política de Privacidad</a>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleMenu(){
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(link=>{
+      link.addEventListener("click",()=>{
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>

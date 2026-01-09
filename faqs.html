@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs - Vértigo Show</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{min-height:100%}
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:#000;
+      color:#d4af37;
+      line-height:1.6;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("vertigo_show_logo_transparente_total.png") no-repeat center center;
+      background-size:110vmin;
+      opacity:.18;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    nav,.section,footer{position:relative;z-index:1}
+
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      background:rgba(0,0,0,.85);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:1rem;
+      z-index:999;
+    }
+
+    nav a{
+      color:#00eaff;
+      margin:0 1rem;
+      text-decoration:none;
+      font-weight:bold;
+      transition:.3s;
+    }
+
+    nav a:hover{color:#ff004c}
+
+    /* === MENÚ MÓVIL (AÑADIDO) === */
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color:#00eaff;
+      font-size:2rem;
+      cursor:pointer;
+    }
+
+    .nav-links{
+      display:flex;
+    }
+
+    .section{
+      padding:6.3rem 2rem 4rem;
+      max-width:1100px;
+      margin:auto;
+    }
+
+    .section h1{
+      font-size:3rem;
+      color:#00eaff;
+      margin-bottom:.8rem;
+      text-align:center;
+    }
+
+    .intro{
+      text-align:center;
+      max-width:850px;
+      margin:0 auto 2.2rem;
+      font-size:1.1rem;
+    }
+
+    .faq-item{
+      background:#111;
+      margin-bottom:1.5rem;
+      border-radius:10px;
+      border:2px solid #00eaff;
+      overflow:hidden;
+      transition:.35s;
+    }
+
+    .faq-item:hover{
+      border-color:#d4af37;
+      box-shadow:0 0 25px rgba(212,175,55,.35);
+    }
+
+    .faq-question{
+      padding:1.5rem;
+      font-size:1.25rem;
+      font-weight:700;
+      color:#00eaff;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .faq-question::after{
+      content:'+';
+      font-size:2rem;
+      transition:.3s;
+    }
+
+    .faq-item.active .faq-question::after{
+      transform:rotate(45deg);
+    }
+
+    .faq-answer{
+      padding:0 1.5rem;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .35s ease,padding .35s ease;
+    }
+
+    .faq-item.active .faq-answer{
+      padding:0 1.5rem 1.2rem;
+      max-height:600px;
+    }
+
+    .faq-answer p{
+      font-size:1.08rem;
+      line-height:1.75;
+      margin-bottom:.8rem;
+    }
+
+    .cta-box{
+      margin-top:2.8rem;
+      text-align:center;
+      background:#0b0b0b;
+      border:2px solid #00eaff;
+      border-radius:12px;
+      padding:2rem 1.5rem;
+    }
+
+    .cta-box strong{color:#fff}
+    .cta-box a{
+      color:#00eaff;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    footer{
+      text-align:center;
+      padding:2rem 1rem;
+      font-size:.95rem;
+      background:#05080c;
+      color:#d4af37;
+      font-family:'Poppins',sans-serif;
+    }
+
+    footer strong{color:#ffd700;}
+    footer a{color:#00eaff;text-decoration:none;}
+    footer a.contact-link,
+    footer a.contact-link strong{color:#00eaff;}
+    footer a:hover{text-decoration:underline;}
+
+    @media(max-width:768px){
+      nav{justify-content:space-between;padding:.8rem 1rem}
+      .menu-toggle{display:block}
+
+      .nav-links{
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background:rgba(0,0,0,.95);
+        flex-direction:column;
+        align-items:center;
+        display:none;
+        padding:1.5rem 0;
+      }
+
+      .nav-links.active{display:flex}
+
+      .nav-links a{
+        margin:0;
+        padding:.9rem 0;
+        font-size:1.15rem;
+      }
+
+      .section h1{font-size:2.2rem}
+      .faq-question{font-size:1.05rem}
+      body::before{display:none}
+      .section{padding:6rem 1.2rem 3.5rem}
+      .faq-answer p{font-size:1rem}
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Sobre Nosotros</a>
+      <a href="espectaculos.html">Espectáculos</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+    </div>
+  </nav>
+
+  <div class="section" data-aos="fade-up">
+
+    <h1>Preguntas Frecuentes</h1>
+
+    <p class="intro">
+      Aquí respondemos de forma sencilla a las dudas más habituales sobre nuestros espectáculos de flyboard.
+      Si te queda alguna pregunta, escríbenos sin compromiso. Estaremos encantados de ayudarte.
+    </p>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Dónde se puede hacer el show?</div>
+      <div class="faq-answer">
+        <p>El espectáculo puede realizarse en puertos deportivos, mar abierto, lagos, playas o piscinas.</p>
+        <p>Solo necesitamos una profundidad suficiente para operar con total seguridad. Si el fondo es inferior a 1,5m, debe ser liso y regular.</p>
+        <p>Antes de cada actuación revisamos siempre el entorno para garantizar que todo se desarrolle sin riesgos.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Es seguro?</div>
+      <div class="faq-answer">
+        <p>Sí. Trabajamos únicamente con pilotos profesionales y con amplia experiencia.</p>
+        <p>Aplicamos protocolos de seguridad en cada evento.</p>
+        <p>Además, todos nuestros espectáculos cuentan con Seguro de Responsabilidad Civil.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Se puede personalizar el espectáculo?</div>
+      <div class="faq-answer">
+        <p>Sí. Adaptamos el numero de riders, la música, el vestuario, efectos de luz en los trajes, fuego frío y puesta en escena según tu evento o marca.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Cuánto dura un espectáculo?</div>
+      <div class="faq-answer">
+        <p>Nuestros espectáculos de Flyboard tienen una duración aproximada de 20 a 25 minutos, tiempo ideal para disfrutar de una exhibición llena de acrobacias, vuelo y espectáculo visual.</p>
+        <p>Si lo necesitas, también podemos realizar varios shows el mismo día o en fechas diferentes, adaptándonos a la programación de tu evento.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Qué pasa si el tiempo no acompaña?</div>
+      <div class="faq-answer">
+        <p>Si las condiciones no permiten garantizar la seguridad, buscamos alternativa o reprogramación contigo.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Cuánto cuesta un espectáculo?</div>
+      <div class="faq-answer">
+        <p>Depende del lugar, formato, logística y efectos.</p>
+        <p>Preparamos presupuestos personalizados sin compromiso.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Con cuánta antelación debo contratar?</div>
+      <div class="faq-answer">
+        <p>Lo ideal es entre 4 y 8 semanas.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Ofrecen grabación y fotografía?</div>
+      <div class="faq-answer">
+        <p>Sí. Podemos incluir grabación aérea y fotografía profesional.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Qué necesitamos como organización?</div>
+      <div class="faq-answer">
+        <p>Nosotros nos encargamos de toda la parte técnica del espectáculo.</p>
+        <p>Las licencias y permisos necesarios deberán ser gestionados por la organización que contrata nuestros servicios.</p>
+        <p>Solo necesitamos acceso al punto de actuación y apoyo logístico básico.</p>
+      </div>
+    </div>
+    
+    <div class="cta-box">
+      <p>¿Tienes alguna otra duda?</p>
+      <p>
+        Escríbenos por WhatsApp al <strong>+34 622 605 836</strong><br>
+        o visita nuestra página de <a href="contacto.html">Contacto</a>.
+      </p>
+      <p>Te asesoramos sin compromiso.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    Contacto por WhatsApp:
+    <a href="tel:+34622605836" class="contact-link"><strong>+34 622 605 836</strong></a> |
+    Email:
+    <a href="mailto:info@vertigoshowproducciones.com" class="contact-link">info@vertigoshowproducciones.com</a> |
+    Vértigo Show © 2026
+    <br><br>
+    <a href="aviso-legal.html">Aviso Legal y Política de Privacidad</a>
+  </footer>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    function toggleMenu(){
+      document.getElementById("navLinks").classList.toggle("active");
+    }
+
+    document.querySelectorAll(".nav-links a").forEach(link=>{
+      link.addEventListener("click",()=>{
+        document.getElementById("navLinks").classList.remove("active");
+      });
+    });
+
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faq = question.parentElement;
+        const open = faq.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
+        if (!open) faq.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

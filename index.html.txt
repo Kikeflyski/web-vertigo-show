@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio - Vértigo Show</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    /* NUEVO: botón hamburguesa (por defecto oculto en escritorio) */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: #00eaff;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0.25rem 0.6rem;
+      line-height: 1;
+    }
+
+    nav a {
+      color: #00eaff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff004c;
+    }
+
+    .section {
+      padding: 2rem 1rem;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 40px rgba(0, 234, 255, 0.3);
+      display: block;
+    }
+
+    .video-container h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #00eaff;
+      font-size: 2.8rem;
+      text-shadow: 0 0 20px #00eaff, 0 0 40px rgba(0, 0, 0, 0.8);
+      z-index: 10;
+      margin: 0;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      animation: destellos 2s ease-in-out infinite;
+    }
+
+    @keyframes destellos {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .intro-block {
+      max-width: 900px;
+      margin: 2rem auto 0;
+      text-align: center;
+    }
+
+    .intro-block p {
+      font-size: 1.2rem;
+      color: #FFD700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-buttons a {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      margin: 0.5rem;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      background: #ff004c;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .cta-buttons a:hover {
+      background: #00eaff;
+      color: #000;
+    }
+
+    .trust-badges {
+      margin-top: 1.5rem;
+      color: #FFD700;
+      font-size: 1rem;
+    }
+
+    .trust-badges p {
+      margin: 0.3rem 0;
+    }
+
+    .scroll-section {
+      position: relative;
+      padding: 8rem 2rem 6rem;
+      max-width: 1000px;
+      margin: 80px auto;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .scroll-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: url('vertigo_show_logo_transparente_total.png') no-repeat center center / contain;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .scroll-section h1,
+    .scroll-section p {
+      position: relative;
+      z-index: 2;
+    }
+
+    .scroll-section h1 {
+      color: #00eaff;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .scroll-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #FFD700;
+      margin-bottom: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #111;
+      color: #d4af37;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: #00eaff;
+      text-decoration: none;
+    }
+
+    footer strong {
+      color: #ffd700;
+    }
+
+    /* 🔵 FORZAMOS AZUL EN TELÉFONO Y EMAIL */
+    footer a.contact-link,
+    footer a.contact-link strong {
+      color: #00eaff;
+    }
+
+    @media (max-width: 768px) {
+      .video-container h1 {
+        font-size: 1.6rem;
+        padding: 0.3rem 0.8rem;
+      }
+
+      .intro-block p {
+        font-size: 1rem;
+      }
+
+      .cta-buttons a {
+        width: 100%;
+        max-width: 300px;
+        margin: 0.8rem auto;
+        display: block;
+      }
+
+      .scroll-section {
+        padding: 5rem 1.5rem 4rem;
+      }
+
+      .scroll-section::before {
+        width: 480px;
+        height: 480px;
+        opacity: 0.14;
+      }
+
+      .scroll-section p {
+        font-size: 1.05rem;
+      }
+
+      /* ====== NUEVO: MENÚ MÓVIL ====== */
+
+      /* En móvil, el nav deja de ser "centrado" para poder poner el botón */
+      nav {
+        text-align: left;
+        padding: 0.8rem 1rem;
+      }
+
+      /* Mostramos el botón hamburguesa */
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      /* Los enlaces se meten en columna y se ocultan por defecto */
+      .nav-links {
+        display: none;
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid rgba(0, 234, 255, 0.15);
+      }
+
+      /* Cuando está abierto */
+      .nav-links.active {
+        display: block;
+      }
+
+      /* Links grandes y cómodos para el dedo */
+      .nav-links a {
+        display: block;
+        margin: 0;
+        padding: 0.75rem 0;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <!-- NUEVO: botón hamburguesa (solo visible en móvil) -->
+    <button class="menu-toggle" type="button" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
+      ☰
+    </button>
+
+    <!-- NUEVO: envolvemos tus enlaces en un contenedor -->
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Sobre Nosotros</a>
+      <a href="espectaculos.html">Espectáculos</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="faqs.html">FAQs</a>
+      <a href="contacto.html">Contacto</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+    </div>
+  </nav>
+
+  <div class="section">
+    <div class="video-container">
+      <h1>Espectáculos de Flyboard para Eventos</h1>
+
+      <video autoplay muted loop playsinline>
+        <source src="video grow.MP4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+
+    <div class="intro-block">
+      <p>
+        Espectáculos profesionales de flyboard para ayuntamientos, puertos, festivales, hoteles,
+        marcas y eventos privados en toda España y a nivel internacional.
+      </p>
+
+      <div class="cta-buttons">
+        <a href="contacto.html">Quiero información para mi evento</a>
+      </div>
+
+      <div class="trust-badges">
+        <p>✔ Más de 10 años creando espectáculos acuáticos</p>
+        <p>✔ Pilotos profesionales y coordinación técnica</p>
+        <p>✔ Seguro de Responsabilidad Civil incluido</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="scroll-section">
+    <h1>Bienvenidos a Vértigo Show</h1>
+
+    <p>Es arte en movimiento, adrenalina controlada y una experiencia que transforma cualquier evento en algo inolvidable.</p>
+
+    <p>Cuando un rider se eleva sobre el agua, el público deja de mirar… y empieza a sentir.</p>
+
+    <p>No solo volamos sobre el agua: creamos emociones que se recuerdan para siempre.</p>
+  </section>
+
+  <footer>
+    Contacto por WhatsApp:
+    <a href="tel:+34622605836" class="contact-link"><strong>+34 622 605 836</strong></a> |
+    Email:
+    <a href="mailto:info@vertigoshowproducciones.com" class="contact-link">info@vertigoshowproducciones.com</a> |
+    Vértigo Show © 2026
+    <br><br>
+    <a href="aviso-legal.html">Aviso Legal y Política de Privacidad</a>
+  </footer>
+
+  <!-- NUEVO: JS mínimo para abrir/cerrar el menú -->
+  <script>
+    function toggleMenu() {
+      var navLinks = document.getElementById("navLinks");
+      var btn = document.querySelector(".menu-toggle");
+      var isOpen = navLinks.classList.toggle("active");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+  </script>
+
+</body>
+</html>
